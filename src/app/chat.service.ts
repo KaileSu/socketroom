@@ -18,6 +18,8 @@ export class ChatService {
 
   constructor() {
       this.socket = io(this.url);
+      this.socket.emit('test', 'hello world');
+      // for testing
   }
 
   public sendMessage(message) {
