@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
            
             roomKeys = Object.keys(socket.rooms); 
             if (roomlist.indexOf(room) == -1){roomlist.push(room);}
-            io.to(room).emit(room + 'init-message', socket.id + " has joined into " + room);
+            io.to(room).emit('init-message', socket.id + " has joined into " + room);
             // let all sockets in the room know someone joined
             
             

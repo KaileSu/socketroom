@@ -44,12 +44,7 @@ export class AppComponent  implements OnInit {
     }
   joinInRoom(): void {
     this.chatService.reqJoin(this.selectedRoom);
-    this.serRes = 'waiting for response for room ' + this.selectedRoom ;
-    this.chatService.getInitMessages().subscribe((m: string) => {
-        this.firstRoomMessage = m;
-        console.log(m);
-    });
-    
+    this.serRes = 'waiting for response for room ' + this.selectedRoom ;  
   }
   
   sendRoomMessage() {
@@ -61,6 +56,11 @@ export class AppComponent  implements OnInit {
   ngOnInit() {
     this.chatService.getRoomMessages().subscribe((m: string) => {
       this.roomMessages.push(m);
+    });
+
+    this.chatService.getInitMessages().subscribe((m: string) => {
+      this.firstRoomMessage = m;
+      console.log(m);
     });
     
 

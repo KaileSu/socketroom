@@ -64,7 +64,7 @@ export class ChatService {
 
   public getInitMessages = () => {
     return Observable.create((observer) => {
-        this.socket.on(this.currentroom + 'init-message', (m) => {
+        this.socket.on('init-message', (m) => {
             observer.next(m);
         });
     });
