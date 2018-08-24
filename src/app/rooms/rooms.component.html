@@ -1,0 +1,29 @@
+<h2>Rooms</h2>
+<ul>
+  <li *ngFor="let room of rooms"
+    (click)="onSelect(room)">
+     <span>{{room}}</span>
+  </li>
+</ul>
+
+
+
+  <h2>Create New Room</h2>
+
+  <div>
+    
+     <input [(ngModel)]="selectedRoom" placeholder="room">
+  
+    <button (click)="joinInRoom()"> Join Room {{selectedRoom}}</button>
+   
+  </div>
+
+  <div>
+    {{serRes}}:  {{firstRoomMessage}}
+  </div>
+
+
+
+
+<app-room-detail [room]="selectedRoom"></app-room-detail>
+ 
