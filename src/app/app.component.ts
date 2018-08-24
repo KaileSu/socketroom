@@ -8,9 +8,7 @@ import { ChatService } from './chat.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  implements OnInit {
-  title = 'app';
-  message: string;
-  messages: string[] = [];
+  title = 'Chatting Room';
   rooms: string[] = [];
   selectedRoom = '';
   firstRoomMessage: string;
@@ -29,10 +27,7 @@ export class AppComponent  implements OnInit {
    (window as any).global = window;
    */
 
-  sendMessage() {
-    this.chatService.sendMessage(this.message);
-    this.message = '';
-  }
+  
 
   roomList() {
     this.chatService.reqRoomList();
@@ -54,13 +49,11 @@ export class AppComponent  implements OnInit {
         this.firstRoomMessage = m;
         console.log(m);
     });
-  }
-  watchRoomMessage() {
     this.chatService.getRoomMessages().subscribe((m: string) => {
       this.roomMessages.push(m);
     });
-
   }
+  
   sendRoomMessage() {
     this.chatService.sendRoomMessage(this.roomMessage);
     console.log('room-message:' + this.roomMessage);
@@ -68,12 +61,7 @@ export class AppComponent  implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService
-      .getMessages().subscribe((m: string) => {
-        this.messages.push(m);
-      });
-    console.log(this.selectedRoom);
-
+    
 
   }
 

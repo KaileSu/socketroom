@@ -10,17 +10,14 @@ import { HttpModule } from '@angular/http';
 // for http
 
 import { ChatService } from './chat.service';
-import { RoomsComponent } from './rooms/rooms.component';
-import { RoomDetailComponent } from './room-detail/room-detail.component';
+
 import { AppRoutingModule } from './/app-routing.module';
 // created service
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RoomsComponent,
-    RoomDetailComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
