@@ -15,7 +15,7 @@ let io = socketIO(server);
 
 const port = process.env.PORT || 3000;
 
-let roomlist = ['room0','room1']; // intial two rooms for test
+let roomlist = ['room0',]; // intial a room for test
 var roomKeys = []; // just for testing socket.rooms
 var currentRoom = ''; // current room for a socket
 var socketRoom = []; // list of socket.id and joined room
@@ -49,19 +49,13 @@ io.on('connection', (socket) => {
             io.to(room).emit(room + 'init-message', socket.id + " has joined into " + room);
             // let all sockets in the room know someone joined
             
-            console.log('joined room: ' + room);
-            console.log('roomkeys: ' + roomKeys);
+            
             
         });
         
     })
     
-    // for pubic chatting among all sockets
-    socket.on('new-message', (message) => { 
-        console.log(message);
-        io.emit('new-message',message);
-        });
-    
+   
     // for pubic chatting in some room
     socket.on('new-room-message', (message) => {
         console.log('room message got by server:' + message);

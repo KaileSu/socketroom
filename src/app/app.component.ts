@@ -49,9 +49,7 @@ export class AppComponent  implements OnInit {
         this.firstRoomMessage = m;
         console.log(m);
     });
-    this.chatService.getRoomMessages().subscribe((m: string) => {
-      this.roomMessages.push(m);
-    });
+    
   }
   
   sendRoomMessage() {
@@ -61,6 +59,9 @@ export class AppComponent  implements OnInit {
   }
 
   ngOnInit() {
+    this.chatService.getRoomMessages().subscribe((m: string) => {
+      this.roomMessages.push(m);
+    });
     
 
   }
