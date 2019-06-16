@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 // added for form
 
-import { HttpModule } from '@angular/http';
-// for http
+// import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
+// use httpclientmodule
 
-import { ChatService } from './chat.service';
+// import { ChatService } from './chat.service';
 
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 // created service
 
 
@@ -22,10 +23,13 @@ import { AppRoutingModule } from './/app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    // HttpModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ChatService],
+  providers: [
+    // ChatService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

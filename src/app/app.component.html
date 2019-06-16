@@ -3,10 +3,7 @@
   <h1>  Welcome to {{ title }}! </h1>    
 </div>
 
-
-
 <div>  <button (click)="roomList()">Room List</button></div>
-
 
 <h2>Rooms</h2>
 <ul>
@@ -15,8 +12,6 @@
      <span>{{room}}</span>
   </li>
 </ul>
-
-
 
   <h2>Create New Room</h2>
 
@@ -28,6 +23,7 @@
   <div> {{firstRoomMessage}}</div>
 
 <h3>Chating at the selected room </h3>
+
 <div *ngFor="let m of roomMessages"> {{m}} </div>
 
 <input [(ngModel)]="roomMessage" />

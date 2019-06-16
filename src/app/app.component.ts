@@ -31,8 +31,6 @@ export class AppComponent  implements OnInit {
 
   roomList() {
     this.chatService.reqRoomList();
-   // this.rooms = this.chatService.allrooms;
-   // console.log('tttt' + JSON.stringify(this.rooms));
     this.chatService.getRoomlist().subscribe((m: string) => {
     this.rooms = JSON.parse(m);
     });

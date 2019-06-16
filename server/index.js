@@ -15,7 +15,7 @@ let io = socketIO(server);
 
 const port = process.env.PORT || 3000;
 
-let roomlist = ['room0',]; // intial a room for test
+let roomlist = ['room0','room1']; // intial a room for test
 var roomKeys = []; // just for testing socket.rooms
 var currentRoom = ''; // current room for a socket
 var socketRoom = []; // list of socket.id and joined room
@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
         // socket.join(room) is async
         socket.join(room, function() {
             var k = 1;
-            for (i=0; i<socketRoom.length;i++){
+            for (let i=0; i<socketRoom.length;i++){
                 if (socketRoom[i][0] == socket.id){
                     socketRoom[i][1] = room;
                     k = 0;
@@ -60,10 +60,10 @@ io.on('connection', (socket) => {
     socket.on('new-room-message', (message) => {
         console.log('room message got by server:' + message);
         console.log(JSON.stringify(socket.rooms));
-        for (i=0; i<socketRoom.length;i++){
+        for (let i=0; i<socketRoom.length;i++){
             if (socketRoom[i][0] == socket.id ){
                 currentRoom = socketRoom[i][1]
-                io.to(currentRoom).emit('new-room-message', message);
+                io.to(currentRoom).emit('new-room-message', message+' said by ' + socket.id + ' in ' + currentRoom);
             }
         }       
     });
