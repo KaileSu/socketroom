@@ -20,17 +20,8 @@ export class AppComponent  implements OnInit {
   constructor(chatService: ChatService) {
     this.chatService = chatService;
   }
-  /*
-  Uncaught ReferenceError: global is not defined
-   resolved by angular/angular-cli#8160 (comment)
-   add polyfills.ts:
-   (window as any).global = window;
-   */
-
   
-
   roomList() {
-    this.chatService.reqRoomList();
     this.chatService.getRoomlist().subscribe((m: string) => {
     this.rooms = JSON.parse(m);
     });
@@ -52,6 +43,13 @@ export class AppComponent  implements OnInit {
   }
 
   ngOnInit() {
+
+    this.roomList();
+
+    this.chatService.getNewRoom().subscribe((m: string) => {
+      this.rooms.push(m);
+    });
+
     this.chatService.getRoomMessages().subscribe((m: string) => {
       this.roomMessages.push(m);
     });
@@ -60,7 +58,6 @@ export class AppComponent  implements OnInit {
       this.firstRoomMessage = m;
       console.log(m);
     });
-    
 
   }
 

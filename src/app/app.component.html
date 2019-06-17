@@ -1,26 +1,24 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>  Welcome to {{ title }}! </h1>    
+    <h1> Welcome to {{ title }}! </h1>
 </div>
 
-<div>  <button (click)="roomList()">Room List</button></div>
 
 <h2>Rooms</h2>
 <ul>
-  <li *ngFor="let room of rooms"
-    (click)="onSelect(room)">
-     <span>{{room}}</span>
-  </li>
+    <li *ngFor="let room of rooms" (click)="onSelect(room)">
+        <span>{{room}}</span>
+    </li>
 </ul>
 
-  <h2>Create New Room</h2>
+<h2>Create New Room</h2>
 
-  <div>
-     <input [(ngModel)]="selectedRoom" placeholder="room">
-    <button (click)="joinInRoom()"> Join Room {{selectedRoom}}</button> 
-  </div>
+<div>
+    <input [(ngModel)]="selectedRoom" placeholder="room">
+    <button (click)="joinInRoom()"> Join Room {{selectedRoom}}</button>
+</div>
 
-  <div> {{firstRoomMessage}}</div>
+<div> {{firstRoomMessage}}</div>
 
 <h3>Chating at the selected room </h3>
 
@@ -28,10 +26,3 @@
 
 <input [(ngModel)]="roomMessage" />
 <button (click)="sendRoomMessage()">Send in Room</button>
-
-
-
-
-
-
-

@@ -23,10 +23,6 @@ export class ChatService {
       // for test
   }
 
-  public reqRoomList() {
-    this.socket.emit('roomlist', 'Room List Please');
-    // this.socket.on('roomlist', (m) => { this.allrooms = JSON.parse(m); this.router.navigateByUrl('rooms'); });
-  }
 
 
 // request join a room
@@ -39,6 +35,14 @@ export class ChatService {
   public getRoomlist = () => {
     return Observable.create((observer) => {
         this.socket.on('roomlist', (message) => {
+            observer.next(message);
+        });
+    });
+  }
+
+  public getNewRoom = () => {
+    return Observable.create((observer) => {
+        this.socket.on('newRoom', (message) => {
             observer.next(message);
         });
     });
