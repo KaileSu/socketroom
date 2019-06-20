@@ -22,8 +22,6 @@ var socketRoom = [];
 io.on('connection', (socket) => {
     let currentRoom = '';
     console.log('user connected');
-    socket.on('test', (message) => { console.log(message); });
-    // for testing
     io.emit('roomlist', JSON.stringify(roomlist));
     // once a client has connected, we expect to get a ping from them saying what room they want to join
     socket.on('room', function(room) {
@@ -58,7 +56,8 @@ io.on('connection', (socket) => {
     socket.on('new-room-message', (message) => {
         console.log('room message got by server:' + message);
         console.log(JSON.stringify(socket.rooms));
-        io.to(currentRoom).emit('new-room-message', message + ' said by ' + socket.id + ' in ' + currentRoom);
+        io.to(currentRoom).emit('new-room-message',
+            JSON.stringify([message, socket.id, currentRoom]));
     });
 });
 

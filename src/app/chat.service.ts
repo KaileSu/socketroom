@@ -12,24 +12,16 @@ import { Observable } from 'rxjs';
 
 export class ChatService {
   private url = 'http://localhost:3000';
-  private socket;
-  allrooms: string[] = [];
-  joinedrooms: string[] = [];
-  currentroom: string;
+  // private socket;
+  socket;
 
   constructor(private router: Router) {
       this.socket = io(this.url);
-      this.socket.emit('test', 'hello world');
-      // for test
   }
-
-
 
 // request join a room
   public reqJoin(roomid) {
     this.socket.emit('room', roomid);
-     this.joinedrooms.push(roomid);
-     this.currentroom = roomid;
   }
 
   public getRoomlist = () => {
@@ -48,14 +40,8 @@ export class ChatService {
     });
   }
 
-  
-
-  
-
-
   public sendRoomMessage(m) {
     this.socket.emit('new-room-message', m);
-    console.log('new-room-message:' + m);
   }
 
   public getRoomMessages = () => {

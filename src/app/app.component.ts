@@ -8,13 +8,12 @@ import { ChatService } from './chat.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  implements OnInit {
-  title = 'Chatting Room';
+  title = 'Chatting Rooms';
   rooms: string[] = [];
   selectedRoom = '';
   firstRoomMessage: string;
-  serRes = '';
   roomMessage: string;
-  roomMessages: string[] = [];
+  roomMessages = [];
   chatService: ChatService;
 
   constructor(chatService: ChatService) {
@@ -24,16 +23,21 @@ export class AppComponent  implements OnInit {
   roomList() {
     this.chatService.getRoomlist().subscribe((m: string) => {
     this.rooms = JSON.parse(m);
+    this.rooms.forEach((item, index) => {
+      if (this.roomMessages[index] == null) {
+        this.roomMessages[index] = [item];
+      } 
+     });      
     });
   }
 
   onSelect(room): void {
     this.selectedRoom = room;
     // this.chatService.reqJoin(this.selectedRoom);
-    }
+  }
+  
   joinInRoom(): void {
     this.chatService.reqJoin(this.selectedRoom);
-    this.serRes = 'waiting for response for room ' + this.selectedRoom ;  
   }
   
   sendRoomMessage() {
@@ -47,11 +51,27 @@ export class AppComponent  implements OnInit {
     this.roomList();
 
     this.chatService.getNewRoom().subscribe((m: string) => {
-      this.rooms.push(m);
+      if (this.rooms.indexOf(m) == -1) {
+        this.rooms.push(m);
+        this.roomMessages.push([m]);
+      }
+      
     });
 
+   /* if use socket.on directively:
+   this.chatService.socket.on('newRoom', m=> {
+      this.rooms.push(m);
+    });
+    */
+
     this.chatService.getRoomMessages().subscribe((m: string) => {
-      this.roomMessages.push(m);
+      let t3 = JSON.parse(m);
+      console.log(t3);
+      this.roomMessages.forEach((item, index) =>{ 
+        if (item[0]==t3[2]) {
+          this.roomMessages[index].push(t3[1] + ' : ' + t3[0]);
+        }
+      });
     });
 
     this.chatService.getInitMessages().subscribe((m: string) => {
